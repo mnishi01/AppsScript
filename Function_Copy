@@ -1,0 +1,32 @@
+
+function Test_Copy() {
+  var DataSource = 'Sheet2!A2:F5';
+  var SheetTarget = 'Sheet1';
+  var RangeTarget = 'B10';
+  var FlagFV = 'F';
+  var FlagF = 'V';
+  
+  Copy_Sheet_Range(DataSource, SheetTarget, RangeTarget, FlagFV, FlagF)
+}
+
+
+
+function Copy_Sheet_Range(DataSource, SheetTarget, RangeTarget, FlagFV, FlagF) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName(SheetTarget), true);
+  spreadsheet.getRange(RangeTarget).activate();
+
+  if (FlagFV == 'V') {
+    spreadsheet.getRange(DataSource).copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_VALUES, false);
+  } 
+  else { 
+    spreadsheet.getRange(DataSource).copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_FORMULA, false);
+  }
+
+  if (FlagF == 'V') {
+    spreadsheet.getRange(DataSource).copyTo(spreadsheet.getActiveRange(), SpreadsheetApp.CopyPasteType.PASTE_FORMAT, false);
+  }
+
+  spreadsheet.getRange('A1').activate();  
+};
