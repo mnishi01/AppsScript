@@ -1,0 +1,60 @@
+
+function Test_Insert_Row() {
+  var SheetName = 'Sheet1';
+  var RangeName = '2:5';
+  var FlagAB = 'B';
+
+  Insert_Sheet_Row(SheetName, RangeName, FlagAB)
+
+  var RangeName = '6:8';
+  var FlagAB = 'A';
+
+  Insert_Sheet_Row(SheetName, RangeName, FlagAB)
+}
+
+function Test_Insert_Column() {
+  var SheetName = 'Sheet1';
+  var RangeName = 'B:D';
+  var FlagAB = 'B';
+
+  Insert_Sheet_Column(SheetName, RangeName, FlagAB)
+
+  var RangeName = 'G:H';
+  var FlagAB = 'A';
+
+  Insert_Sheet_Column(SheetName, RangeName, FlagAB)
+}
+
+
+
+function Insert_Sheet_Row(SheetName, RangeName, FlagAB) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName(SheetName), true);
+  spreadsheet.getRange(RangeName).activate();
+
+  if (FlagAB == "B") {
+    spreadsheet.getActiveSheet().insertRowsBefore(spreadsheet.getActiveRange().getRow(), spreadsheet.getActiveRange().getNumRows());
+  }
+  else {
+    spreadsheet.getActiveSheet().insertRowsAfter(spreadsheet.getActiveRange().getRow(), spreadsheet.getActiveRange().getNumRows());
+  }  
+
+  spreadsheet.getRange('A1').activate();
+};
+
+function Insert_Sheet_Column(SheetName, RangeName, FlagAB) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName(SheetName), true);
+  spreadsheet.getRange(RangeName).activate();
+
+  if (FlagAB == "B") {
+    spreadsheet.getActiveSheet().insertColumnsBefore(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+  }
+  else {
+    spreadsheet.getActiveSheet().insertColumnsAfter(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+  }  
+
+  spreadsheet.getRange('A1').activate();
+};
