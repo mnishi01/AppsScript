@@ -1,0 +1,6 @@
+
+function GetSheetName() {
+
+  return SpreadsheetApp.getActiveSpreadsheet().getActiveSheet().getName();
+
+}
