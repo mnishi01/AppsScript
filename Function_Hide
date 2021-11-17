@@ -1,0 +1,98 @@
+
+function Test_Hide_Sheet() {
+  var SheetName = 'Sheet1';
+  var FlagSH = 'H';
+
+  Hide_Sheet(SheetName, FlagSH)
+}
+
+function Test_UnHide_Sheet() {
+  var SheetName = 'Sheet1';
+  var FlagSH = 'S';
+
+  Hide_Sheet(SheetName, FlagSH)
+}
+
+function Test_Hide_Row() {
+  var SheetName = 'Sheet1';
+  var RangeName = '2:5';
+  var FlagSH = 'H';
+
+  Hide_Sheet_Row(SheetName, RangeName, FlagSH)
+}
+
+function Test_UnHide_Row() {
+  var SheetName = 'Sheet1';
+  var RangeName = '1:6';
+  var FlagSH = 'S';
+
+  Hide_Sheet_Row(SheetName, RangeName, FlagSH)
+}
+
+function Test_Hide_Column() {
+  var SheetName = 'Sheet1';
+  var RangeName = 'C:F';
+  var FlagSH = 'H';
+
+  Hide_Sheet_Column(SheetName, RangeName, FlagSH)
+}
+
+function Test_UnHide_Column() {
+  var SheetName = 'Sheet1';
+  var RangeName = 'B:G';
+  var FlagSH = 'S';
+
+  Hide_Sheet_Column(SheetName, RangeName, FlagSH)
+}
+
+
+
+function Hide_Sheet(SheetName, FlagSH) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+
+  if (FlagSH == "H") {
+    spreadsheet.setActiveSheet(spreadsheet.getSheetByName(SheetName), true);
+    spreadsheet.getRange('A1').activate();
+    spreadsheet.getActiveSheet().hideSheet();
+  }
+  else {
+    spreadsheet.getSheetByName(SheetName).showSheet().activate();
+    spreadsheet.setActiveSheet(spreadsheet.getSheetByName(SheetName), true);
+    spreadsheet.getRange('A1').activate();
+  }
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName('Main'), true);
+  spreadsheet.getRange('A1').activate();
+};
+
+function Hide_Sheet_Row(SheetName, RangeName, FlagSH) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName(SheetName), true);
+  spreadsheet.getRange(RangeName).activate();
+
+  if (FlagSH == "H") {
+    spreadsheet.getActiveSheet().hideRows(spreadsheet.getActiveRange().getRow(), spreadsheet.getActiveRange().getNumRows());
+  }
+  else {
+    spreadsheet.getActiveSheet().showRows(spreadsheet.getActiveRange().getRow(), spreadsheet.getActiveRange().getNumRows());
+  }
+
+  spreadsheet.getRange('A1').activate();  
+};
+
+function Hide_Sheet_Column(SheetName, RangeName, FlagSH) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName(SheetName), true);
+  spreadsheet.getRange(RangeName).activate();
+
+  if (FlagSH == "H") {
+    spreadsheet.getActiveSheet().hideColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+  }
+  else {
+    spreadsheet.getActiveSheet().showColumns(spreadsheet.getActiveRange().getColumn(), spreadsheet.getActiveRange().getNumColumns());
+  }
+
+  spreadsheet.getRange('A1').activate();  
+};
