@@ -1,0 +1,23 @@
+
+function Test_Clear() {
+  var SheetName = 'Sheet2';
+  var RangeName = 'A4:F5';
+
+  Clear_Sheet_Range(SheetName, RangeName)
+
+  SheetName = 'Sheet1';
+  RangeName = 'B5:C7'
+
+  Clear_Sheet_Range(SheetName, RangeName)
+}
+
+
+
+function Clear_Sheet_Range(SheetName, RangeName) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+
+  spreadsheet.setActiveSheet(spreadsheet.getSheetByName(SheetName));
+  spreadsheet.getRange(RangeName).activate();
+  spreadsheet.getActiveRangeList().clear({contentsOnly: true, skipFilteredRows: true});
+  spreadsheet.getRange('A1').activate();
+};
